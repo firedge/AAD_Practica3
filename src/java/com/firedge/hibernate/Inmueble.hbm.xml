@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jan 29, 2015 8:47:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="com.firedge.hibernate.Inmueble" table="inmueble" catalog="inmobiliaria" optimistic-lock="version">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="localidad" type="string">
+            <column name="localidad" length="100" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="150" not-null="true" />
+        </property>
+        <property name="tipo" type="string">
+            <column name="tipo" length="50" not-null="true" />
+        </property>
+        <property name="precio" type="big_decimal">
+            <column name="precio" precision="10" not-null="true" />
+        </property>
+        <property name="usuario" type="string">
+            <column name="usuario" length="50" not-null="true" />
+        </property>
+        <set name="fotoses" table="fotos" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="idinmueble" not-null="true" />
+            </key>
+            <one-to-many class="com.firedge.hibernate.Fotos" />
+        </set>
+    </class>
+</hibernate-mapping>
