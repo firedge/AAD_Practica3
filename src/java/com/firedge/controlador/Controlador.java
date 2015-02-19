@@ -5,6 +5,7 @@ import com.firedge.modelo.ModeloInmueble;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.math.BigDecimal;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -55,9 +56,34 @@ public class Controlador extends HttpServlet {
             inmueble.setLocalidad(request.getParameter("localidad"));
             inmueble.setDireccion(request.getParameter("direccion"));
             inmueble.setTipo(request.getParameter("tipo"));
-            inmueble.setPrecio(BigDecimal.valueOf(Double.parseDouble(request.getParameter("precio"))));
+            try{
+                inmueble.setPrecio(BigDecimal.valueOf(Double.parseDouble(request.getParameter("precio"))));
+            } catch (Exception e){
+                inmueble.setPrecio(BigDecimal.valueOf(0));
+            }
             inmueble.setUsuario(request.getParameter("usuario"));
+            System.out.println(inmueble.toString());
             ModeloInmueble.insert(inmueble);
+        } else if(target.equals("inmueble")
+                && op.equals("insert")
+                && action.equals("opm")){
+            forward = true;
+            Inmueble inmueble = new Inmueble();
+            inmueble.setLocalidad(request.getParameter("localidad"));
+            inmueble.setDireccion(request.getParameter("direccion"));
+            inmueble.setTipo(request.getParameter("tipo"));
+            try{
+                inmueble.setPrecio(BigDecimal.valueOf(Double.parseDouble(request.getParameter("precio"))));
+            } catch (Exception e){
+                inmueble.setPrecio(BigDecimal.valueOf(0));
+            }
+            inmueble.setUsuario(request.getParameter("usuario"));
+            System.out.println(inmueble.toString());
+            ModeloInmueble.insert(inmueble);
+            List<Inmueble> lista = ModeloInmueble.get();
+            int id = lista.get(lista.size()-1).getId();
+            request.setAttribute("id", id);
+            destino = "WEB-INF/id.jsp";
             
         //Editar un inmueble
         } else if(target.equals("inmueble")

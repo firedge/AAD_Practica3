@@ -90,7 +90,12 @@ public class Inmueble  implements java.io.Serializable {
         this.fotoses = fotoses;
     }
 
+    @Override
+    public String toString() {
+        return "Inmueble{" + "id=" + id + ", localidad=" + localidad + ", direccion=" + direccion + ", tipo=" + tipo + ", precio=" + precio + ", usuario=" + usuario + ", fotoses=" + fotoses + '}';
+    }
 
+    
 
 
 }

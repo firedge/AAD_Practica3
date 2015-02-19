@@ -38,8 +38,11 @@
                     List<Fotos> lista = (List<Fotos>) request.getAttribute("datos");
                     for (Fotos p : lista) {
                 %>
-                <img class="fotos" src="<%= p.getRuta()%>" width="250" height="250"/>
-                <a href="controlfotos?target=fotos&op=delete&action=op&id=<%= p.getId()%>">borrar</a>
+                <div class="fotos">
+                    <img src="<%= p.getRuta()%>" width="250" height="250"/>
+                    <br>
+                    <a href="controlfotos?target=fotos&op=delete&action=op&id=<%= p.getId()%>">borrar</a>
+                </div>
                 <%
                     }
                 %>
